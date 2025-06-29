@@ -32,6 +32,7 @@ import FormLabel from "@mui/material/FormLabel";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 const sortOptions = [
   { name: "Price: Low to High", href: "#", current: false },
@@ -46,6 +47,50 @@ export default function Product() {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const totalNoOfPages = mens_kurta.length / 8;
   const [currentIndex, setCurrentIndex] = useState(1);
+  const navigate = useNavigate();
+
+  const location = useLocation();
+
+  const handleFilter = function (value,sectionID) {
+    const userParams = new URLSearchParams(location.search);
+    // console.log(userParams)
+    let filtervalue = userParams.getAll(sectionID)
+    // console.log(filtervalue)
+    if (filtervalue.length > 0 && filtervalue[0].split(",").includes(value)) {
+      filtervalue = filtervalue[0].split(",").filter((valu) => valu !== value);
+      if (filtervalue.length == 0) {
+        userParams.delete(sectionID)
+      }
+
+    }
+    else {
+      filtervalue.push(value);
+      console.log("FILTER VALUE", filtervalue);
+    }
+
+    if (filtervalue.length > 0) {
+      console.log(filtervalue.join(","))
+      userParams.set(sectionID, filtervalue.join(","))
+    }
+
+      const query = userParams.toString();
+      // console.log('QUERY',query)
+      navigate({search : `?${query}`})
+    
+  }
+
+  const handleSingleFilter = function (value, sectionID) {
+    const userParams = new URLSearchParams(location.search);
+    // let filtervalue = userParams.getAll(sectionID);
+    // if (filtervalue.length > 0) {
+    //   filtervalue.pop();
+    // }
+    // filtervalue.push(value);
+    userParams.set(sectionID, value);
+    const query = userParams.toString();
+    navigate({search : `?${query}`})
+
+  }
 
   const pressNext = function () {
     setCurrentIndex((index) => {
@@ -275,6 +320,7 @@ export default function Product() {
                                     id={`filter-${section.id}-${optionIdx}`}
                                     name={`${section.id}[]`}
                                     type="checkbox"
+                                    onChange={()=>handleFilter(option.value,section.id)}
                                     className="col-start-1 row-start-1 appearance-none rounded-sm border border-gray-300 bg-white checked:border-indigo-600 checked:bg-indigo-600 indeterminate:border-indigo-600 indeterminate:bg-indigo-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:border-gray-300 disabled:bg-gray-100 disabled:checked:bg-gray-100 forced-colors:appearance-auto"
                                   />
                                   <svg
@@ -346,6 +392,7 @@ export default function Product() {
                                 <FormControlLabel
                                   value={option.value}
                                   control={<Radio />}
+                                  onClick={()=>handleSingleFilter(option.value,section.id)}
                                   label={option.label}
                                 />
                               ))}
