@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function HomeSectionCard({ image}) {
+export default function HomeSectionCard({ image , className=""}) {
     return (
         <>
-            <div className="cursor-pointer flex flex-col items-center  rounded-lg w-[15rem] bg-white shadow-md overflow-hidden mx-3 mt-3 mb-3 border border-black/10">
+            <div className={`cursor-pointer flex flex-col items-center  rounded-lg w-[15rem] bg-white shadow-md overflow-hidden mx-3 mt-3 mb-3 border border-black/10 ${className}`}>
                 <div className='h-[13rem] w-[10rem]'>
                         <img className = " object-cover object-top w-full h-full"src={image.imageUrl}></img>
                 </div>

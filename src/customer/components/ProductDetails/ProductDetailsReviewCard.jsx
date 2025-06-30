@@ -5,7 +5,7 @@ export default function ProductDetailsReviewCard() {
     return (
         <>
             
-            <div className="border border-gray-300 mx-auto  p-5 flex gap-2">
+            <div className="p-5 flex gap-2">
                    <img
                       alt=""
                       src="https://i.pinimg.com/736x/69/a5/60/69a5602fb6377d1fef9bb45e8db9e415.jpg"
@@ -16,7 +16,7 @@ export default function ProductDetailsReviewCard() {
                     <p className='text-lg font-semibold'>Raam</p>
                     <p className='opacity-70'>April 5, 2023</p>
                     <Rating name="read-only" value={4.5} readOnly precision={.5} />
-                    <p>nice product, i love this shirt</p>
+                    <p>nice product, i love this shirt. bla bla bla bla bla bla bla 444444444</p>
 
                     </div>
             </div>

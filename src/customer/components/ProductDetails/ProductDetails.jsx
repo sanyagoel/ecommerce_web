@@ -1,26 +1,12 @@
-/*
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    theme: {
-      extend: {
-        gridTemplateRows: {
-          '[auto,auto,1fr]': 'auto auto 1fr',
-        },
-      },
-    },
-  }
-  ```
-*/
 import { StarIcon } from '@heroicons/react/20/solid'
 import Rating from '@mui/material/Rating';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import ProductDetailsReviewCard from './ProductDetailsReviewCard';
-
+import { LinearProgress } from '@mui/material';
+import { men_shirts } from '../ProductsData/menShirts';
+import HomeSectionCard from '../HomeSectionCard';
+import './productDetails.css'
 
 const product = {
   name: 'Basic Tee 6-Pack',
@@ -139,7 +125,7 @@ export default function ProductDetails() {
         {/* Product info */}
                 {/* <div className="mx-auto max-w-2xl px-4 pt-10 pb-16 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto_auto_1fr] lg:gap-x-8 lg:px-8 lg:pt-16 lg:pb-24"> */}
 
-<div className="px-4 pb-16 sm:px-6 lg:px-8  lg:pb-24">
+<div className="px-4 pb-16 sm:px-6 lg:px-8  lg:pb-8">
           <div className="lg:col-span-2lg:pr-8">
                           <h1 className="text-sm font-medium tracking-tight text-gray-900 sm:text-xl">UniversalOutfit</h1>
                           <p className="text-xl  tracking-tight text-gray-400 sm:text-xl mt-1">Casual Puff Sleeves Sold Women White Top</p>
@@ -293,9 +279,72 @@ export default function ProductDetails() {
 
               <section className=''>
                   <h2 className='mb-4 font-semibold'>Recent Reviews & Ratings</h2>
-                  
-                  { [1,1,1].map(()=>{return <ProductDetailsReviewCard/>})} 
+                  <div className="flex border border-gray-200 w-full gap-x-40">
+          <div className="flex flex-col flex-grow w-full">
+               { [1,1,1].map(()=>{return <ProductDetailsReviewCard/>})} 
+            </div>
+
+            <div className='flex flex-col mt-[1rem] gap-1  w-full ml-[13rem]'>
+              <h3 className='font-semibold text-lg'>Product Ratings</h3>
+              <part className='flex gap-x-3'>
+                <Rating name="read-only" value={4.5} readOnly precision={.5} />
+                <p>54890 ratings</p>
+              </part>
+              <div className="flex gap-10 items-center mt-4">
+                <p className='w-20'>Excellent</p>
+ <LinearProgress variant="determinate" value={70} sx={{ "& .MuiLinearProgress-bar": {
+      bgcolor: "#3bb143", // filled part
+                }, bgcolor: "#cccccc", height: 7, borderRadius: 4,width: '40%'
+                }}></LinearProgress>
+              </div>
+
+                <div className="flex gap-10 items-center mt-1">
+                <p  className='w-20'>Very Good</p>
+ <LinearProgress variant="determinate" value={60} sx={{ "& .MuiLinearProgress-bar": {
+      bgcolor: "#3bb143", // filled part
+                }, bgcolor: "#cccccc", height: 7, borderRadius: 4,width: '40%'
+                }}></LinearProgress>
+              </div>
+
+                <div className="flex gap-10 items-center mt-1">
+                <p  className='w-20'>Good</p>
+ <LinearProgress variant="determinate" value={45} sx={{ "& .MuiLinearProgress-bar": {
+      bgcolor: "#ffde21", // filled part
+                }, bgcolor: "#cccccc", height: 7, borderRadius: 4,width: '40%'
+                }}></LinearProgress>
+              </div>
+
+                <div className="flex gap-10 items-center mt-1">
+                <p  className='w-20'>Average</p>
+ <LinearProgress variant="determinate" value={27} sx={{ "& .MuiLinearProgress-bar": {
+      bgcolor: "#4c3228", // filled part
+                }, bgcolor: "#cccccc", height: 7, borderRadius: 4,width: '40%'
+                }}></LinearProgress>
+              </div>
+
+                <div className="flex gap-10 items-center mt-1">
+                <p  className='w-20'>Poor</p>
+ <LinearProgress variant="determinate" value={15} sx={{ "& .MuiLinearProgress-bar": {
+      bgcolor: "#d30000", // filled part
+                }, bgcolor: "#cccccc", height: 7, borderRadius: 4,width: '40%'
+                }}></LinearProgress>
+              </div>
+             
+            </div>
+            
+            </div>
                   </section>
+
+        
+        {/* Similar Products */}
+        
+        <section className='mt-[2rem]'>
+          <h2 className='font-bold'>Similar Products</h2>
+          <div className='flex flex-wrap gap-x-2 mt-5'>
+            {men_shirts.map((product) => <HomeSectionCard image={product} className="productCard"/>)}     
+          </div>
+        </section>
+
 
       </div>
     </div>
