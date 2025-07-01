@@ -17,7 +17,6 @@ export default function AddressCard() {
                 </div>
                 <div className="font-semibold">Phone Number</div>
                 <div>9856785442</div>
-                <Button sx={{ bgcolor: "RGB(145 85 253)", mt: 2, color: 'white', fontSize: "0.8em", px: "2rem", py: "0.6rem", '&:hover': { bgcolor: "#cccccc" } }}>Deliver here</Button>
             </div>
         </>
     )

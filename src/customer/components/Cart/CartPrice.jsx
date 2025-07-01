@@ -1,6 +1,13 @@
 import { Button, IconButton } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
-export default function CartPrice () {
+export default function CartPrice() {
+
+    const navigate = useNavigate();
+    
+    const handleCheckout = function () {
+        navigate(`/checkout?step=2`)
+    }
     return (
          <section className='border border-gray-200 w-full mx-auto mt-[1rem] shadow-lg p-3'>
                             <h3 className='mb-3 text-gray-500 font-bold'>PRICE DETAILS</h3>
@@ -27,7 +34,7 @@ export default function CartPrice () {
                             <p className='font-bold text-green-600 text-lg'>&#8377;1278</p>
                             </div>
         
-                            <Button sx={{bgcolor:"RGB(145 85 253)", mt:5, color:'white', fontSize:"0.7em" , px:"8rem" , py:"0.65rem", mx:"auto",display: "block" , '&:hover' : {bgcolor:"#cccccc"}}}>Check out</Button>
+            <Button onClick={handleCheckout} sx={{bgcolor:"RGB(145 85 253)", mt:5, color:'white', fontSize:"0.7em" , px:"8rem" , py:"0.65rem", mx:"auto",display: "block" , '&:hover' : {bgcolor:"#cccccc"}}}>Check out</Button>
                         </section>
     )
 }

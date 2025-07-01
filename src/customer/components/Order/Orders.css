@@ -1,0 +1,10 @@
+.orderCard{
+    transition: transform 0.3s ease-out;
+
+}
+
+
+.orderCard:hover{
+transform : translateY(-1rem);
+box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}

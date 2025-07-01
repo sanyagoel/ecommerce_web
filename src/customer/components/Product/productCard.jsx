@@ -1,10 +1,12 @@
+import { useNavigate } from 'react-router-dom';
 import './productcss.css';
 
 
 export default function ProductCard({clothes}) {
+    const navigate = useNavigate();
     return (
         <>
-            <div className="h-[20rem] m-3 w-[12rem] cursor-pointer productCard">
+            <div onClick={()=>{navigate(`/product/${5}`)} } className="h-[20rem] m-3 w-[12rem] cursor-pointer productCard">
             <div className="h-[15rem]">
                 <img src={clothes.imageUrl} className="w-full h-full object-cover object-left-top"></img>
             </div>

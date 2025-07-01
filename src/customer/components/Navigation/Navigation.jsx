@@ -5,6 +5,7 @@ import {
   Dialog,
   DialogBackdrop,
   DialogPanel,
+  MenuButton,
   Popover,
   PopoverButton,
   PopoverGroup,
@@ -23,9 +24,34 @@ import {
 } from "@heroicons/react/24/outline";
 
 import { navigation } from "./navigationData";
+import { useNavigate } from "react-router-dom";
+import { Menu, MenuItem } from "@mui/material";
 
 export default function Navigation() {
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
+  const [anchor, setAnchor] = useState(null);
+  const open2 = Boolean(anchor);
+
+
+                    // <Menu anchorEl={anchor} open={open} onClose={handleCloseMenu}>
+
+
+  const  handleCategoryClick = function(category, section, item, close) {
+    navigate(`/${category.id}/${section.id}/${item.id}`);
+    close();
+  }
+
+  const handleMenuOpen = function (e) {
+    console.log(e.currentTarget)
+    setAnchor(e.currentTarget)
+  }
+
+  const handleMenuClose = function(){
+    setAnchor(null);
+  }
+
+
 
   return (
     <div className="bg-white">
@@ -141,18 +167,30 @@ export default function Navigation() {
             </div>
 
             <div className="border-t border-gray-200 px-4 py-6">
-              <a href="#" className="-m-2 flex items-center p-2">
+              <div onClick={handleMenuOpen} className="-m-2 flex items-center p-2">
                 <img
                   alt=""
                   src="https://i.pinimg.com/736x/69/a5/60/69a5602fb6377d1fef9bb45e8db9e415.jpg"
                   className="block h-auto w-5 shrink-0"
                 />
-                <span className="sr-only">, change currency</span>
-              </a>
+                 
+              </div>
             </div>
           </DialogPanel>
         </div>
       </Dialog>
+
+       <Menu anchorEl={anchor} open={open2} onClose={handleMenuClose}>
+          <MenuItem>
+           Profile
+          </MenuItem>
+            <MenuItem>
+           My Orders
+          </MenuItem>
+            <MenuItem>
+            Logout
+          </MenuItem>
+      </Menu>
 
       <header className="relative bg-white">
         <p className="flex h-10 items-center justify-center bg-indigo-600 px-4 text-sm font-medium text-white sm:px-6 lg:px-8">
@@ -258,8 +296,9 @@ export default function Navigation() {
                                       {section.items.map((item) => (
                                         <li key={item.name} className="flex">
                                           <a
-                                            href={item.href}
+                                            href=""
                                             className="hover:text-gray-800"
+                                            onClick={()=>{handleCategoryClick(category,section,item,close)}}
                                           >
                                             {item.name}
                                           </a>
@@ -299,8 +338,14 @@ export default function Navigation() {
                       alt=""
                       src="https://i.pinimg.com/736x/69/a5/60/69a5602fb6377d1fef9bb45e8db9e415.jpg"
                       className="block h-auto w-8 shrink-0 rounded-full "
+                       onClick={handleMenuOpen}
                     />
                   </a>
+                    <Menu anchorEl={anchor} open={open2} onClose={handleMenuClose}>
+      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+      <MenuItem onClick={()=>{navigate(`/product/order`)}}>My Orders</MenuItem>
+      <MenuItem onClick={handleMenuClose}>Logout</MenuItem>
+    </Menu>
                 </div>
 
                 {/* Search */}

@@ -7,6 +7,7 @@ import { LinearProgress } from '@mui/material';
 import { men_shirts } from '../ProductsData/menShirts';
 import HomeSectionCard from '../HomeSectionCard';
 import './productDetails.css'
+import { useNavigate } from 'react-router-dom';
 
 const product = {
   name: 'Basic Tee 6-Pack',
@@ -63,6 +64,12 @@ function classNames(...classes) {
 }
 
 export default function ProductDetails() {
+
+  const navigate = useNavigate();
+
+  const handleAddToCart = function () {
+    navigate(`/cart`);
+  }
   return (
     <div className="bg-white lg:px-20">
       <div className="pt-6">
@@ -212,7 +219,7 @@ export default function ProductDetails() {
                 ADD TO CART
               </button> */}
 
-              <Button variant="contained" color="secondary" sx={{px : "2rem", py : "1rem", mt : 4, bgcolor:"#9155fd", '&:hover':{ bgcolor: "#4b0076"}}}>Add to Cart</Button>
+              <Button onClick={handleAddToCart} variant="contained" color="secondary" sx={{px : "2rem", py : "1rem", mt : 4, bgcolor:"#9155fd", '&:hover':{ bgcolor: "#4b0076"}}}>Add to Cart</Button>
           </div>
 
           {/* Options */}
